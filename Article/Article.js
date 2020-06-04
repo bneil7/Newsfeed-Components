@@ -85,6 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Star Lorem Wars Ipsum Harry Pikachu Hog Lorem Warts Ipsum',
+    date: 'April 20, 3069',
+    firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
+          moff wicket tatooine luke.Solo wampa wampa calrissian yoda moff.Darth grievous darth gonk darth hutt.Darth baba skywalker
+          watto fett jango maul han.Mon ewok sidious sidious lando kenobi grievous gamorrean solo.Yoda wedge utapau darth calamari.
+          Hutt calamari darth jabba.Darth dooku amidala organa moff.Boba darth binks solo hutt skywalker dantooine skywalker.Qui - gonn
+          jar twi'lek jinn leia jango skywalker mon.`,
+
+    secondParagraph: `Boggarts lavender robes, Hermione Granger Fantastic Beasts and Where to Find Them. Bee in your bonnet Hand of Glory elder
+          wand, spectacles House Cup Bertie Bott’s Every Flavor Beans Impedimenta. Stunning spells tap-dancing spider Slytherin’s Heir
+          mewing kittens Remus Lupin. Palominos scarlet train black robes, Metamorphimagus Niffler dead easy second bedroom. Padma
+          and Parvati Sorting Hat Minister of Magic blue turban remember my last.`,
+
+    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
+          Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
+          Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous`
   }
 ];
 
@@ -111,3 +129,53 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+function articleMaker(articleName) {
+  const articleContainer = document.createElement('div');
+  articleContainer.classList.add('article');
+
+  const articleTitle = document.createElement('h2');
+  articleTitle.textContent = articleName.title;
+
+  const articleDate = document.createElement('p');
+  articleDate.classList.add('date');
+  articleDate.textContent = articleName.date;
+
+  const articlePar1 = document.createElement('p');
+  articlePar1.textContent = articleName.firstParagraph;
+
+  const articlePar2 = document.createElement('p');
+  articlePar2.textContent = articleName.secondParagraph;
+
+  const articlePar3 = document.createElement('p');
+  articlePar3.textContent = articleName.thirdParagraph;
+
+  const expandButton = document.createElement('span');
+  expandButton.classList.add('expandButton');
+  expandButton.textContent = '\u25bc';
+
+  articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate);
+  articleContainer.appendChild(articlePar1);
+  articleContainer.appendChild(articlePar2);
+  articleContainer.appendChild(articlePar3);
+  articleContainer.appendChild(expandButton);
+
+  expandButton.addEventListener('click', (event) => {
+    articleContainer.classList.toggle('article-open');
+    if (expandButton.textContent === '\u25bc') {
+      expandButton.textContent = '\u25b2';
+    } else {
+      expandButton.textContent = '\u25bc';
+    }
+  });
+
+  return articleContainer;
+};
+
+let articleNew = data.map((arrObj) => {
+  let articleNew = articleMaker(arrObj);
+  let articleSection = document.querySelector('.articles');
+
+  articleSection.appendChild(articleNew);
+});
